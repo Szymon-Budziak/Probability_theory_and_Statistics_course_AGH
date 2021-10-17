@@ -2,7 +2,7 @@
 output: 
   html_document:
     keep_md: true
----    
+---
 # Wprowadzenie do programowania w R — cz. 1
 Semestr zimowy 2021/22
 
