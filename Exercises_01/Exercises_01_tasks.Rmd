@@ -1,7 +1,6 @@
 ---
-output: 
-  html_document:
-    keep_md: true
+title: "Exercises 01 tasks"
+output: rmarkdown::github_document
 ---
 # Wprowadzenie do programowania w R — cz. 1
 Semestr zimowy 2021/22
@@ -46,6 +45,7 @@ precip_mean <- mean(precip)
 names(precip[precip == precip_mean])
 ```
 #### 8. W których miastach opady różnią się od mediany nie więcej niż 0.5 cala?
+**first solution**
 ```{r}
 precip_median <- median(precip)
 for (i in seq_along(precip)){
@@ -54,6 +54,12 @@ for (i in seq_along(precip)){
   }
 }
 ```
+**second solution**
+```{r}
+precip_median <- median(precip)
+names(precip[abs(precip - precip_median) < 0.5])
+```
+
 #### 9. W którym mieście opady są najmniejsze, a w którym największe?
 ```{r}
 names(which.min(precip))
