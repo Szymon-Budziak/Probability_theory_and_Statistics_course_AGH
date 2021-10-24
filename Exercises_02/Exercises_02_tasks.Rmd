@@ -1,0 +1,61 @@
+---
+title: "Exercises 2 tasks"
+output: rmarkdown::github_document
+---
+# Wprowadzenie do programowania w R — cz. 2
+Semestr zimowy 2021/22
+
+## Zadania
+Zadania oparte są na zbiorze danych Auto. Należy napisać skrypt w R, który znajduje następujące informacje.
+```{r}
+auto <- read.csv("Auto.csv", header = TRUE, na.strings = "?")
+head(auto)
+```
+#### 1. Jakie jest średnie zużycie paliwa (mpg) wszystkich samochodów?
+```{r}
+mean(auto[, "mpg"])
+```
+#### 2. Jakie jest średnie zużycie paliwa samochodów, które mają 4 cylindry?
+```{r}
+mean(auto$mpg[auto$cylinders == 4])
+```
+#### 3. Jaka jest mediana wagi (weight) wszystkich samochodów?
+```{r}
+median(auto[,"weight"])
+```
+#### 4. Jakie jest średnie zużycie paliwa samochodów wyprodukowanych w roku 72?
+```{r}
+mean(auto$mpg[auto$year == 72])
+```
+#### 5. Jaka jest wariancja przyspieszenia (acceleration) wszystkich samochodów?
+```{r}
+var(auto[, "acceleration"])
+```
+#### 6. Jaka jest wariancja przyspieszenia samochodów japońskich (origin == 3)?
+```{r}
+var(auto$acceleration[auto$origin == 3])
+```
+#### 7. Ile jest samochodów, których moc (horsepower) jest powyżej średniej?
+```{r}
+sum(auto$horsepower > mean(auto$horsepower, na.rm=TRUE), na.rm=TRUE)
+```
+#### 8. Jaka jest maksymalna moc samochodów, których waga jest poniżej średniej?
+```{r}
+max(auto$horsepower[auto$weight < mean(auto$weight, na.rm = TRUE)], na.rm = TRUE)
+```
+#### 9. Ile jest samochodów, których zużycie paliwa jest poniżej średniej (czyli mpg jest powyżej średniej)?
+```{r}
+sum(auto$mpg > mean(auto$mpg))
+```
+#### 10. Jaka jest minimalna liczba cylindrów samochodów, których zużycie paliwa jest poniżej średniej?
+```{r}
+min(auto$cylinders[auto$mpg < mean(auto$mpg)])
+```
+#### 11. Ile jest samochodów o maksymalnej pojemności silnika (displacement)?
+```{r}
+sum(auto$displacement == max(auto$displacement))
+```
+#### 12. Jakie jest maksymalna waga (weight) samochodów, których pojemność silnika jest mniejsza od jej mediany?
+```{r}
+max(auto$weight[auto$displacement < median(auto$displacement)])
+```
