@@ -1,0 +1,23 @@
+---
+title: "Exercises 4 tasks"
+output: rmarkdown::github_document
+---
+Napisz funkcję w R obliczającą liczbę losowań z ostatniego zadania matematycznego dla podanej wartości ilorazu |S|/|D| i podangeo δ. Przy jej pomocy wyznacz liczbę losowań dla δ = 0.9 oraz:
+
+  a) |S|/|D| = 0.001,
+  b) |S|/|D| = 10^(-6).
+```{r}
+library("SciViews")
+```
+
+```{r}
+number_of_draws <- function(quotient, delta){
+  result <- as.integer(ln(1-delta)/ ln(1-quotient))
+  return(result)
+}
+```
+
+```{r}
+number_of_draws(0.001, 0.9)
+number_of_draws(10**(-6), 0.9)
+```
