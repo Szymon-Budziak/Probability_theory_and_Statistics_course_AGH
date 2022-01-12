@@ -1,0 +1,53 @@
+Exercises 6 tasks
+================
+
+### 1. Liczba bramek strzelonych w każdym meczu przez pewną drużynę piłkarską ma rozkład Pois(2). Jakie jest prawdopodobieństwo zdobycia przez tę drużynę co najmniej 5 bramek w meczu?
+
+1st solution:
+
+``` r
+result1 <- 1 - ppois(4, 2)
+result1
+```
+
+    ## [1] 0.05265302
+
+2nd solution:
+
+``` r
+result2 <- 1 - (dpois(0, 2) + dpois(1, 2) + dpois(2, 2) + dpois(3, 2) + dpois(4,2))
+result2
+```
+
+    ## [1] 0.05265302
+
+### 2. Wylosowano 90 studentów i utworzono szereg rozdzielczy ich nieobecnosci w ciągu semestru. Zakładamy, ze liczba nieobecności ma rozkład Poissona z nieznanym parametrem λ. Pamiętając, że λ jest wartością oczekiwannąw rozkładzie Poissona oblicz estymowaną (czyli wyznaczoną przez dostępne dane) wartość tego parametru w naszym przykładzie, a następnie oblicz prawdopodobieństwo tego, że student będzie w ciągu semestru nieobecny co najmniej 4 razy.
+
+### Liczba nieobecności: 0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 7
+
+### Liczba studentów: 12 \| 20 \| 27 \| 18 \| 7 \| 3 \| 2 \| 1
+
+``` r
+lambda <- (1/90) * (0*12 + 1*20 + 2*27 + 3*18 + 4*7 + 5*3 + 6*2 + 7*1)
+lambda
+```
+
+    ## [1] 2.111111
+
+1st solution
+
+``` r
+result1 <- 1 - ppois(3, lambda)
+result1
+```
+
+    ## [1] 0.1634623
+
+2nd solution
+
+``` r
+result2 <- 1 - (dpois(0, lambda) + dpois(1, lambda) + dpois(2, lambda) + dpois(3, lambda))
+result2
+```
+
+    ## [1] 0.1634623
