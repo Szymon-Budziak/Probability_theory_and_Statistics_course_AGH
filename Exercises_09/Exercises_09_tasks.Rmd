@@ -1,0 +1,70 @@
+---
+title: "Exercises 9 tasks"
+output: rmarkdown::github_document
+---
+Plik `gamma.dat` zawiera dane pochodzące z rozkładu gamma. Znajdź estymaty parametrów tego rozkładu korzystając:
+
+ - metody momentów,
+ - metody największej wiarygodności [można skorzystać albo z funkcji `optim()` albo z funkcji `fitdistr()` z pakietu MASS.].
+ 
+**Konkretnie należy napisać skrypt, który:**
+
+ - wczyta dane z podanego pliku i umieści je w wektorze numerycznym,
+ - znajdzie estymatę parametrów rozkładu gamma metodą momentów (patrz wykład),
+ - znajdzie estymatę parametrów rozkładu gamma metodą największej wiarygodności przy pomocy standardowej funkcji `optim()`,
+ - porówna otrzymane estymaty.
+```{r}
+data <- scan("gamma.dat")
+data
+```
+## Method of moments
+```{r}
+data_mean <- sum(data)/length(data)
+data_mean
+```
+```{r}
+data_variance <- var(data)
+data_variance
+```
+
+```{r}
+first_moment <- data_mean^2/data_variance
+first_moment
+```
+```{r}
+second_moment <- data_variance/data_mean
+second_moment
+```
+## Maximum likelihood
+```{r}
+gamma_log_likelihood <- function(data, par){
+  a <- par[1]
+  b <- par[2]
+  n <- length(data)
+  sum_log <- sum(log(data))
+  gll <- n*a*log(b) + n*lgamma(a) + sum(data)/b - (a-1)*sum_log
+  return(gll)
+}
+```
+```{r}
+maximum_likelihood <- optim(par=c(first_moment, 1/second_moment), data=data, fn=gamma_log_likelihood)
+
+maximum_likelihood
+```
+```{r}
+likely_first_moment <- maximum_likelihood$par[1]
+likely_first_moment
+```
+```{r}
+likely_second_moment <- maximum_likelihood$par[2]
+likely_second_moment
+```
+## Results comparison
+```{r}
+first_moment_comparison <- first_moment/likely_first_moment
+first_moment_comparison
+```
+```{r}
+second_moment_comparison <- second_moment/likely_second_moment
+second_moment_comparison
+```
