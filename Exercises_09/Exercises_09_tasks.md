@@ -1,4 +1,4 @@
-# Exercises 9 tasks
+Exercises 9 tasks
 ================
 
 Plik `gamma.dat` zawiera dane pochodzące z rozkładu gamma. Znajdź
